@@ -131,14 +131,14 @@ th:first-child, td:first-child {
 /* Responsive Table for Mobile */
 @media screen and (max-width: 768px) {
   th:first-child, td:first-child {
-    min-width: 10px; /* Adjust as needed */
+    min-width: 5px; /* Adjust as needed */
     font-size: 12px; /* Optional: reduce font size for better fit */
   }
 }
 
 
   table {
-    min-width: 1000px; /* Ensure the table has enough width for horizontal scrolling */
+    min-width: 500px; /* Ensure the table has enough width for horizontal scrolling */
   }
 
   th, td {
@@ -154,4 +154,4 @@ th:first-child, td:first-child {
     padding: 8px 16px;
     font-size: 12px;
   }
-}
+
