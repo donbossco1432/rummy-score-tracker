@@ -19,11 +19,12 @@ header {
 }
 .scrolling-quote {
   position: fixed;
-  bottom: 250px;
+  bottom: 200px; /* Adjust to move it up */
   width: 100%;
   background: linear-gradient(90deg, #007bff, #0056b3);
   color: white;
   text-align: center;
+  overflow: hidden; /* Ensure text doesn't overflow the container */
   padding: 10px 0;
   font-size: 16px;
   font-weight: bold;
@@ -31,11 +32,24 @@ header {
   z-index: 1000;
 }
 
-.scrolling-quote marquee {
+.scrolling-text {
+  display: inline-block;
+  white-space: nowrap; /* Ensure the text is on one line */
+  animation: scroll-left 30s linear infinite; /* Smooth scrolling effect */
   font-family: 'Poppins', sans-serif;
   font-size: 18px;
   letter-spacing: 1px;
 }
+
+@keyframes scroll-left {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(-100%);
+  }
+}
+
 
 header h1 {
   color: #444;
