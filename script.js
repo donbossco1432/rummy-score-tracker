@@ -85,9 +85,22 @@ function updateTable() {
       scoreInput.className = "scoreInput";
 
       scoreInput.addEventListener("input", (event) => {
-        const value = parseInt(event.target.value, 10);
-        if (!isNaN(value) && value >= 0) {
-          player.scores[i] = value;
+        const value = event.target.value.trim();
+      
+        // Allow the field to be empty
+        if (value === "") {
+          player.scores[i] = 0; // Default to 0 if left empty
+          row.querySelector(".totalCell").textContent = player.scores.reduce(
+            (sum, score) => sum + score,
+            0
+          );
+          saveData();
+          return;
+        }
+      
+        const numericValue = parseInt(value, 10);
+        if (!isNaN(numericValue) && numericValue >= 0) {
+          player.scores[i] = numericValue;
           row.querySelector(".totalCell").textContent = player.scores.reduce(
             (sum, score) => sum + score,
             0
@@ -97,6 +110,7 @@ function updateTable() {
           event.target.value = player.scores[i];
         }
       });
+      
 
       scoreCell.appendChild(scoreInput);
       row.appendChild(scoreCell);
