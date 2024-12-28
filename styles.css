@@ -1,0 +1,154 @@
+body {
+  font-family: 'Poppins', sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f9f9f9;
+  color: #333;
+}
+
+header {
+  text-align: center;
+  background-color: #ffffff;
+  padding: 20px 0;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+header h1 {
+  color: #444;
+  font-size: 1.8rem;
+  margin-bottom: 10px;
+}
+
+header .controls {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.container {
+  max-width: 100%;
+  margin-top: 140px; /* Leave space for the fixed header */
+  padding: 20px;
+  background: #ffffff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  overflow-x: auto; /* Enable horizontal scrolling */
+  position: relative; /* Necessary for sticky elements */
+}
+
+button {
+  padding: 10px 20px;
+  font-size: 14px;
+  border: none;
+  background-color: #007bff;
+  color: white;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+button:hover {
+  background-color: #0056b3;
+  transform: translateY(-2px);
+}
+
+.reEnterButton {
+  background-color: #ff9800;
+}
+
+.reEnterButton:hover {
+  background-color: #e68900;
+}
+
+/* Table Styles */
+table {
+  width: 100%; /* Ensure the table stretches full width */
+  border-collapse: collapse; /* Proper table styling */
+  border-spacing: 0;
+  background-color: #ffffff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+th, td {
+  padding: 12px 15px;
+  text-align: left;
+}
+
+th {
+  background: linear-gradient(90deg, #007bff, #0056b3);
+  color: white;
+  font-weight: bold;
+  text-transform: uppercase;
+  font-size: 14px;
+  letter-spacing: 0.5px;
+  position: sticky;
+  top: 0;
+  z-index: 2;
+}
+
+td {
+  font-size: 14px;
+  color: #333;
+}
+
+tr:nth-child(odd) td {
+  background-color: #f9f9f9;
+}
+
+tr:nth-child(even) td {
+  background-color: #ffffff;
+}
+
+tr:hover td {
+  background-color: #f0f8ff;
+  transition: background-color 0.3s;
+}
+
+/* Rounded Corners for Table */
+table th:first-child {
+  border-top-left-radius: 8px;
+}
+
+table th:last-child {
+  border-top-right-radius: 8px;
+}
+
+/* Sticky Names Column */
+th:first-child, td:first-child {
+  position: sticky;
+  left: 0;
+  background-color: #ffffff;
+  z-index: 3;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+  min-width: 150px; /* Add width to ensure the column is visible */
+}
+
+/* Responsive Table for Mobile */
+@media screen and (max-width: 768px) {
+  .container {
+    overflow-x: scroll; /* Enable horizontal scrolling */
+  }
+
+  table {
+    min-width: 1000px; /* Ensure the table has enough width for horizontal scrolling */
+  }
+
+  th, td {
+    font-size: 12px;
+    padding: 10px;
+  }
+
+  header {
+    padding: 15px 0;
+  }
+
+  button {
+    padding: 8px 16px;
+    font-size: 12px;
+  }
+}
