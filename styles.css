@@ -130,9 +130,12 @@ th:first-child, td:first-child {
 
 /* Responsive Table for Mobile */
 @media screen and (max-width: 768px) {
-  .container {
-    overflow-x: scroll; /* Enable horizontal scrolling */
+  th:first-child, td:first-child {
+    min-width: 100px; /* Adjust as needed */
+    font-size: 12px; /* Optional: reduce font size for better fit */
   }
+}
+
 
   table {
     min-width: 1000px; /* Ensure the table has enough width for horizontal scrolling */
