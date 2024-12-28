@@ -19,7 +19,7 @@ header {
 }
 .scrolling-quote {
   position: fixed;
-  bottom: 200px; /* Adjust to move it up */
+  bottom: 100px; /* Adjust to move it up */
   width: 100%;
   background: linear-gradient(90deg, #007bff, #0056b3);
   color: white;
