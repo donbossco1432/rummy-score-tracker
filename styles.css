@@ -131,7 +131,7 @@ th:first-child, td:first-child {
 /* Responsive Table for Mobile */
 @media screen and (max-width: 768px) {
   th:first-child, td:first-child {
-    min-width: 100px; /* Adjust as needed */
+    min-width: 20px; /* Adjust as needed */
     font-size: 12px; /* Optional: reduce font size for better fit */
   }
 }
