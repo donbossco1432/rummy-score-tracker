@@ -1,6 +1,6 @@
 const maxPlayers = 7;
 let players = [];
-let rounds = 0;
+let rounds = 1; // Initialize with one round by default
 
 const tableBody = document.querySelector("#scoreTable tbody");
 const tableHeader = document.querySelector("#scoreTable thead tr");
@@ -24,7 +24,7 @@ addPlayerButton.addEventListener("click", () => {
 // Add a new round
 addRoundButton.addEventListener("click", () => {
   rounds++;
-  players.forEach(player => player.scores.push(0)); // Add a score of 0 for the new round
+  players.forEach((player) => player.scores.push(0)); // Add a score of 0 for the new round
 
   // Add a new column to the table header for the new round
   const roundHeader = document.createElement("th");
@@ -38,10 +38,7 @@ addRoundButton.addEventListener("click", () => {
 clearDataButton.addEventListener("click", () => {
   if (confirm("Are you sure you want to clear all data?")) {
     players = [];
-    rounds = 0;
-
-    // Reset table header
-    tableHeader.innerHTML = "";
+    rounds = 1; // Reset to one round
     updateTable();
     localStorage.removeItem("rummyScores");
   }
@@ -72,7 +69,9 @@ function updateTable() {
 
     // Player name with re-entries
     const nameCell = document.createElement("td");
-    nameCell.textContent = `${player.name} ${player.reEntries > 0 ? `(${ '*'.repeat(player.reEntries)})` : ''}`;
+    nameCell.textContent = `${player.name} ${
+      player.reEntries > 0 ? `(${'*'.repeat(player.reEntries)})` : ''
+    }`;
     row.appendChild(nameCell);
 
     // Scores per round
@@ -89,7 +88,10 @@ function updateTable() {
         const value = parseInt(event.target.value, 10);
         if (!isNaN(value) && value >= 0) {
           player.scores[i] = value;
-          row.querySelector(".totalCell").textContent = player.scores.reduce((sum, score) => sum + score, 0);
+          row.querySelector(".totalCell").textContent = player.scores.reduce(
+            (sum, score) => sum + score,
+            0
+          );
           saveData();
         } else {
           event.target.value = player.scores[i];
@@ -135,10 +137,10 @@ function loadData() {
   const data = JSON.parse(localStorage.getItem("rummyScores"));
   if (data) {
     players = data.players;
-    rounds = data.rounds;
-    updateTable();
+    rounds = data.rounds > 0 ? data.rounds : 1; // Ensure at least 1 round
   }
+  updateTable();
 }
 
-// Initialize
+// Initialize with a default round if no data is loaded
 loadData();
