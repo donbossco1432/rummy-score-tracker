@@ -78,17 +78,16 @@ function updateTable() {
     player.scores.forEach((score, i) => {
       const scoreCell = document.createElement("td");
       scoreCell.classList.add("roundColumn"); // Assign class for uniform width
-    
       const scoreInput = document.createElement("input");
       scoreInput.type = "number";
       scoreInput.value = score;
       scoreInput.min = "0";
       scoreInput.className = "scoreInput";
       scoreInput.inputMode = "numeric"; // Ensures numeric keyboard on mobile
-    
+
       scoreInput.addEventListener("input", (event) => {
         const value = event.target.value.trim();
-    
+
         // Allow the field to be empty
         if (value === "") {
           player.scores[i] = 0; // Default to 0 if left empty
@@ -99,7 +98,7 @@ function updateTable() {
           saveData();
           return;
         }
-    
+
         const numericValue = parseInt(value, 10);
         if (!isNaN(numericValue) && numericValue >= 0) {
           player.scores[i] = numericValue;
@@ -112,11 +111,10 @@ function updateTable() {
           event.target.value = player.scores[i];
         }
       });
-    
+
       scoreCell.appendChild(scoreInput);
       row.appendChild(scoreCell);
     });
-    
 
     // Total score
     const totalCell = document.createElement("td");
@@ -140,8 +138,46 @@ function updateTable() {
     tableBody.appendChild(row);
   });
 
+  // Calculate and display the lowest scorer
+  displayPlayerWishes();
+
   saveData();
 }
+
+function displayPlayerWishes() {
+  const lowestPlayerDiv = document.getElementById("lowestPlayer");
+
+  if (players.length === 0) {
+    lowestPlayerDiv.textContent = "No players yet.";
+    return;
+  }
+
+  let currentIndex = 0;
+
+  // Clear any existing interval to avoid overlapping loops
+  if (window.wishInterval) {
+    clearInterval(window.wishInterval);
+  }
+
+  // Function to update the wish message
+  function updateWish() {
+    const player = players[currentIndex];
+    const totalScore = player.scores.reduce((sum, score) => sum + score, 0);
+    lowestPlayerDiv.textContent = `GOOD LUCK, ${player.name.toUpperCase()}! YOUR SCORE: ${totalScore}`;
+
+    // Move to the next player, looping back to the first
+    currentIndex = (currentIndex + 1) % players.length;
+  }
+
+  // Display the first wish immediately
+  updateWish();
+
+  // Set an interval to update the wish every 3 seconds
+  window.wishInterval = setInterval(updateWish, 3000);
+}
+
+
+
 
 // Save data to localStorage
 function saveData() {
