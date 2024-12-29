@@ -78,15 +78,17 @@ function updateTable() {
     player.scores.forEach((score, i) => {
       const scoreCell = document.createElement("td");
       scoreCell.classList.add("roundColumn"); // Assign class for uniform width
+    
       const scoreInput = document.createElement("input");
       scoreInput.type = "number";
       scoreInput.value = score;
       scoreInput.min = "0";
       scoreInput.className = "scoreInput";
-
+      scoreInput.inputMode = "numeric"; // Ensures numeric keyboard on mobile
+    
       scoreInput.addEventListener("input", (event) => {
         const value = event.target.value.trim();
-      
+    
         // Allow the field to be empty
         if (value === "") {
           player.scores[i] = 0; // Default to 0 if left empty
@@ -97,7 +99,7 @@ function updateTable() {
           saveData();
           return;
         }
-      
+    
         const numericValue = parseInt(value, 10);
         if (!isNaN(numericValue) && numericValue >= 0) {
           player.scores[i] = numericValue;
@@ -110,11 +112,11 @@ function updateTable() {
           event.target.value = player.scores[i];
         }
       });
-      
-
+    
       scoreCell.appendChild(scoreInput);
       row.appendChild(scoreCell);
     });
+    
 
     // Total score
     const totalCell = document.createElement("td");
